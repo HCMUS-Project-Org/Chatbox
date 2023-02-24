@@ -1,0 +1,51 @@
+* {
+	margin: auto;
+	padding: auto;
+}
+
+body {
+	background: #343541;
+	font-size: 15px;
+}
+
+h2 {
+	font-size: 50px;
+}
+
+.bg-light-dark {
+	background: #444654 !important;
+}
+
+.bg-dark {
+	background: #343541 !important;
+}
+
+.img-thumbnail {
+	height: 50px;
+	width: 50px;
+}
+.content {
+	color: white;
+}
+
+.chat-gpt-prompt,
+.user-prompt {
+	text-align: justify;
+}
+
+.form-control,
+.input-group-text,
+.send-btn,
+.form-control:focus {
+	background-color: #40414f;
+	color: white;
+	border-width: 0px;
+}
+
+.send-btn:hover {
+	background-color: #343541 !important;
+}
+
+.pre-footer {
+	height: 100px !important;
+}
