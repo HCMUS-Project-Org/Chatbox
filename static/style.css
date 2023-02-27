@@ -38,19 +38,32 @@ h2 {
 	text-align: justify;
 }
 
-.form-control,
-.input-group-text,
+.input-group,
 .send-btn,
-.form-control:focus {
+#prompt,
+#prompt:focus {
 	background-color: #40414f;
 	color: white;
 	border-width: 0px;
 }
 
+#prompt {
+	padding: 10px;
+	width: 100% !important;
+}
+
+.input-group-text,
+.send-btn {
+	padding: 0px;
+	height: 100% !important;
+	/* width: 100% !important; */
+}
+
+.input-group-text,
 .send-btn:hover {
 	background-color: #343541 !important;
 }
 
 .pre-footer {
-	height: 100px !important;
+	height: 130px !important;
 }
