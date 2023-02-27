@@ -17,7 +17,7 @@ app = Flask(__name__)
 Bootstrap(app)
 
 app.config['SECRET_KEY'] = SECRET_KEY
-openai.api_key = "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"
+openai.api_key = "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"
 
 
 def call_openai(prompt):
@@ -54,6 +54,7 @@ def main():
 
             # get chatbot response
             message = call_openai(prompt).replace("\n", "<br>")
+            # message = "one<br>two<br>three"
             message = Markup(message)
 
             print("message:", message)

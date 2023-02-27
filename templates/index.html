@@ -22,6 +22,21 @@
 
 	<body>
 		<div class="d-flex align-items-end position-relative">
+			<!-- loadingView -->
+			<div
+				class="position-fixed top-0 start-0 loading-view"
+				id="loading-view"
+			>
+				<div class="vw-100 vh-100 bg-black opacity-75">
+					<div class="position-absolute top-50 start-50 translate-middle">
+						<div class="spinner-border text-light" role="status">
+							<span class="visually-hidden">Loading...</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end loadingView -->
+
 			<div
 				class="d-flex flex-column justify-content-around align-content-around m-0 vw-100"
 			>
@@ -31,7 +46,7 @@
 				<div class="container mw-100" id="chat-container"></div>
 				<!-- end body -->
 
-				<div class="pre-footer">d</div>
+				<div class="pre-footer">&nbsp;</div>
 
 				<!-- footer -->
 				<footer class="position-relative p-0 h-100">
@@ -50,7 +65,7 @@
 										class="send-btn ms-1 pe-2 me-1 col"
 										id="addon-wrapping send-btn"
 										type="submit"
-										onclick="sendPrompt()"
+										onclick="addMessage('user')"
 									>
 										<i class="far fa-paper-plane"></i>
 									</button>
@@ -87,87 +102,75 @@
 		window.onload = function () {
 			document.getElementById("prompt").value = "";
 
-			addBot();
+			let reloadFlag = false;
+
+			try {
+				reloadFlag = localStorage.getItem("reloadFlag");
+			} catch (err) {
+				console.log(err);
+			}
+
+			console.log("reload flag:" + reloadFlag);
+			if (reloadFlag) {
+				window.localStorage.clear();
+				showLoadingView(false);
+			} else addMessage("bot");
 		};
 
-		function addBot() {
-			console.log("-------- ADD BOT ----------");
-			// alert("addBot");
+		function addMessage(object) {
+			object == "user" ? showLoadingView(true) : showLoadingView(false);
 
 			const chatContainer = document.getElementById("chat-container");
 			chatContainer.innerHTML = localStorage.getItem("Chat");
 
-			console.log(
-				"localStorage.getItem('Chat')",
-				localStorage.getItem("Chat"),
-			);
+			let logo =
+				object == "user"
+					? "/static/assets/logo/User_logo.jpg"
+					: "static/assets/logo/ChatGPT_logo.png";
 
-			let message = "{{message}}";
+			let message =
+				object == "user"
+					? document.getElementById("prompt").value
+					: "{{message}}";
 
-			if (message != "") {
-				const botMsg =
-					`<div class="chat-gpt-prompt row px-5 py-4 bg-light-dark gap-3">
+			let bgColor = object == "user" ? " bg-dark " : " bg-light-dark ";
+
+			const msg =
+				`<div class="chat-gpt-prompt row px-5 py-4 ` +
+				bgColor +
+				` gap-3">
 							<img
 								class="col-1 p-0 img-thumbnail bg-transparent border-0 align-content-end"
-								src="/static/assets/logo/ChatGPT_logo.png"
-								alt="chatGPT_logo"
+								src="` +
+				logo +
+				`"
+								alt="logo"
 							/>
 							<p class="content col-11">` +
-					message +
-					`	</p>
+				message +
+				`	</p>
 						</div>
 					`;
 
-				chatContainer.innerHTML += botMsg;
-
-				localStorage.setItem("Chat", chatContainer.innerHTML);
-				window.scrollTo(
-					0,
-					document.body.scrollHeight ||
-						document.documentElement.scrollHeight,
-				);
-			}
-			console.log("-------- END ADD BOT ----------");
-		}
-
-		function sendPrompt() {
-			console.log("-------- SEND PROMPT ----------");
-			prompt = document.getElementById("prompt").value;
-			console.log("prompt" + prompt);
-
-			if (prompt.replace(" ", "") == "") return;
-
-			const chatContainer = document.getElementById("chat-container");
-			chatContainer.innerHTML = localStorage.getItem("Chat");
-
-			const userPrompt =
-				`<div class="user-prompt row px-5 py-4 gap-3">
-						<img
-							class="col-1 p-0 img-thumbnail bg-transparent border-0"
-							src="/static/assets/logo/User_logo.jpg"
-							alt="User_logo"
-						/>
-						<p class="content col-11">` +
-				prompt +
-				`	</p>
-					</div>
-				`;
-
-			chatContainer.innerHTML += userPrompt;
+			chatContainer.innerHTML += msg;
 
 			localStorage.setItem("Chat", chatContainer.innerHTML);
-			console.log("-------- END SEND PROMPT ----------");
-
 			window.scrollTo(
 				0,
 				document.body.scrollHeight || document.documentElement.scrollHeight,
 			);
 		}
 
+		function showLoadingView(isShow) {
+			let loadingView = document.getElementById("loading-view");
+			loadingView.style.display = isShow ? "block" : "none";
+		}
+
 		function clearChat() {
-			// alert("clear chat");
 			document.getElementById("prompt").value = "";
 			window.localStorage.clear();
+
+			localStorage.setItem("reloadFlag", true);
 			window.location.reload();
 		}
 	</script>

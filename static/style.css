@@ -12,6 +12,10 @@ h2 {
 	font-size: 40px;
 }
 
+.loading-view {
+	z-index: 100;
+}
+
 .bg-light-dark {
 	background: #444654 !important;
 }
