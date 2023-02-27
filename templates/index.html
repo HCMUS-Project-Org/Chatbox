@@ -55,7 +55,7 @@
 							class="position-fixed input-field bottom-0 start-0 text-center bg-dark w-100"
 						>
 							<div
-								class="flex-column justify-content-center align-items-center px-5 pb-4 pt-2"
+								class="flex-column justify-content-center align-items-center px-5 py-2"
 							>
 								<div
 									class="input-group rounded-3 row d-flex align-items-center"
@@ -81,10 +81,15 @@
 									use.
 								</div>
 							</div>
-							<button class="btn btn-warning" onclick="clearChat()">
-								<i class="fas fa-trash-alt"></i>
-								<span class="ps-2">Clear chat</span>
-							</button>
+
+							<!-- button area -->
+							<div class="pb-4">
+								<button class="btn btn-warning" onclick="clearChat()">
+									<i class="fas fa-trash-alt"></i>
+									<span class="ps-2">Clear chat</span>
+								</button>
+							</div>
+							<!-- end button area -->
 						</div>
 					</form>
 				</footer>
@@ -119,6 +124,8 @@
 
 		function addMessage(object) {
 			object == "user" ? showLoadingView(true) : showLoadingView(false);
+
+			if (object == "bot" && "{{message}}".replace('"', "") == "") return;
 
 			const chatContainer = document.getElementById("chat-container");
 			chatContainer.innerHTML = localStorage.getItem("Chat");

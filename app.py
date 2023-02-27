@@ -17,7 +17,7 @@ app = Flask(__name__)
 Bootstrap(app)
 
 app.config['SECRET_KEY'] = SECRET_KEY
-openai.api_key = "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"
+openai.api_key = "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"
 
 
 def call_openai(prompt):
