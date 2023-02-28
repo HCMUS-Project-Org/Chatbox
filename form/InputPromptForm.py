@@ -3,4 +3,6 @@ from wtforms import (StringField)
 
 
 class InputPromptForm(FlaskForm):
-    prompt = StringField("Name",  render_kw={"placeholder": "Prompt"})
+    prompt = StringField("Prompt",  render_kw={"placeholder": "Prompt"})
+    newAPI = StringField("OpenAI API Key",  render_kw={
+                         "placeholder": "OpenAI API Key"})

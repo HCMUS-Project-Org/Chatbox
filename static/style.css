@@ -24,9 +24,9 @@ h2 {
 	background: #343541 !important;
 }
 
-.navbar {
-	background: #202123;
-	height: 100vh !important;
+.modal-content {
+	background: #343541;
+	color: white;
 }
 
 .img-thumbnail {
@@ -45,10 +45,13 @@ h2 {
 .input-group,
 .send-btn,
 #prompt,
-#prompt:focus {
+#prompt:focus,
+#newAPI,
+#newAPI:focus {
 	background-color: #40414f;
 	color: white;
-	border-width: 0px;
+	border-width: 0px !important;
+	outline-width: 0px;
 }
 
 #prompt {
@@ -56,6 +59,11 @@ h2 {
 	width: 100% !important;
 }
 
+#newAPI {
+	border-radius: 10px;
+	padding: 10px 15px;
+	width: 100% !important;
+}
 .input-group-text,
 .send-btn {
 	padding: 0px;
