@@ -75,10 +75,17 @@
 										class="alert alert-danger d-flex align-items-center"
 										role="alert"
 									>
-										<i class="fas fa-exclamation-triangle"></i>
+										<i class="fas fa-exclamation-triangle me-3"></i>
 										<div>
-											Your API Key is invalid, please Enter new
-											OpenAI API key
+											<p>
+												Your API Key is <b>invalid</b>, please
+												<b>Enter new API key</b>
+											</p>
+											You can find your API key at:
+											<a
+												href="https://platform.openai.com/account/api-keys"
+												>https://platform.openai.com/account/api-keys</a
+											>
 										</div>
 									</div>
 									{{form.newAPI}}
@@ -91,7 +98,11 @@
 									>
 										Close
 									</button>
-									<button type="submit" class="btn btn-primary">
+									<button
+										type="submit"
+										class="btn btn-primary"
+										onclick="clearChat()"
+									>
 										Submit
 									</button>
 								</div>

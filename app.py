@@ -9,10 +9,16 @@ from form.InputPromptForm import InputPromptForm
 load_dotenv()  # take environment variables from .env.
 
 SECRET_KEY = os.getenv("SECRET_KEY")
-API_KEY = os.getenv("API_KEY")
 PORT = os.getenv("PORT")
+API_KEY = os.getenv("API_KEY")
+MODEL_ENGINE = os.getenv("MODEL_ENGINE")
+MAX_TOKENS = os.getenv("MAX_TOKENS")
+TEMPERATURE = os.getenv("TEMPERATURE")
+FREQUENCY_PENALTY = os.getenv("FREQUENCY_PENALTY")
+PRESENCE_PENALTY = os.getenv("PRESENCE_PENALTY")
 
-
+print("from .env:", SECRET_KEY, PORT, API_KEY, MODEL_ENGINE,
+      MAX_TOKENS, TEMPERATURE, FREQUENCY_PENALTY, PRESENCE_PENALTY)
 app = Flask(__name__)
 
 Bootstrap(app)
@@ -24,20 +30,19 @@ print("key:", API_KEY)
 
 
 def call_openai(prompt):
-    # Set up the GPT-3 model
-    model_engine = "text-davinci-002"
-
     # Generate text with the GPT-3 model
-    completions = openai.Completion.create(
-        engine=model_engine,
+    response = openai.Completion.create(
+        engine=MODEL_ENGINE,
         prompt=prompt,
-        max_tokens=1024,
-        n=1,
-        stop=None,
-        temperature=0.5,
+        max_tokens=int(MAX_TOKENS),
+        temperature=float(TEMPERATURE),
+        frequency_penalty=float(FREQUENCY_PENALTY),
+        presence_penalty=float(PRESENCE_PENALTY),
+        # stop=["\"\"\""]
     )
+    print("response:", response)
 
-    message = completions.choices[0].text.strip()
+    message = response.choices[0].text.lstrip("?!").strip()
 
     return message
 
