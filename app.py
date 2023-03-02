@@ -1,10 +1,20 @@
-import openai
 import os
-from flask import Flask, render_template, request, Markup
-from dotenv import load_dotenv, set_key, find_dotenv
-from flask_bootstrap import Bootstrap
-from form.InputPromptForm import InputPromptForm
 
+try:
+    import openai
+    from flask import Flask, render_template, request, Markup
+    from dotenv import load_dotenv, set_key, find_dotenv
+    from flask_bootstrap import Bootstrap
+    from form.InputPromptForm import InputPromptForm
+except:
+    import os
+    # import all package
+    os.system("pip install -r requirements.txt")
+
+    from flask import Flask, render_template, request, Markup
+    from dotenv import load_dotenv, set_key, find_dotenv
+    from flask_bootstrap import Bootstrap
+    from form.InputPromptForm import InputPromptForm
 
 load_dotenv()  # take environment variables from .env.
 
@@ -17,8 +27,6 @@ TEMPERATURE = os.getenv("TEMPERATURE")
 FREQUENCY_PENALTY = os.getenv("FREQUENCY_PENALTY")
 PRESENCE_PENALTY = os.getenv("PRESENCE_PENALTY")
 
-print("from .env:", SECRET_KEY, PORT, API_KEY, MODEL_ENGINE,
-      MAX_TOKENS, TEMPERATURE, FREQUENCY_PENALTY, PRESENCE_PENALTY)
 app = Flask(__name__)
 
 Bootstrap(app)
