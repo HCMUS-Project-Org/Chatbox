@@ -84,6 +84,7 @@
 											You can find your API key at:
 											<a
 												href="https://platform.openai.com/account/api-keys"
+												target="_blank"
 												>https://platform.openai.com/account/api-keys</a
 											>
 										</div>
@@ -220,6 +221,8 @@
 		</div>
 	</body>
 
+	<script type="module" src="https://md-block.verou.me/md-block.js"></script>
+
 	<script
 		src="https://kit.fontawesome.com/c67e626608.js"
 		crossorigin="anonymous"
@@ -263,6 +266,32 @@
 			}
 		};
 
+		function scrollBottom() {
+			// window.scrollTo(
+			// 	0,
+			// 	document.body.scrollHeight || document.documentElement.scrollHeight,
+			// );
+			// window.scrollTo({
+			// 	left: 0,
+			// 	top: document.body.scrollHeight,
+			// 	behavior: "smooth",
+			// });
+			scrollInterval;
+			stopScroll;
+
+			var scrollInterval = setInterval(function () {
+				document.documentElement.scrollTop =
+					document.documentElement.scrollHeight;
+			}, 50);
+
+			var stopScroll = setInterval(function () {
+				clearInterval(scrollInterval);
+			}, 100);
+
+			// const scrollingElement = document.scrollingElement || document.body;
+			// scrollingElement.scrollTop = scrollingElement.scrollHeight;
+		}
+
 		function addMessage(object) {
 			object == "user" ? showLoadingView(true) : showLoadingView(false);
 
@@ -281,6 +310,16 @@
 					? document.getElementById("prompt").value
 					: "{{message}}";
 
+			if (
+				(message.includes(".png") || message.includes(".jpg")) &&
+				message.includes("![")
+			) {
+				console.log("this is image");
+
+				message = `<md-block>{{message}}</md-block>`;
+			}
+
+			console.log("message:", message);
 			let bgColor = object == "user" ? " bg-dark " : " bg-light-dark ";
 
 			const msg =
@@ -294,20 +333,20 @@
 				`"
 								alt="logo"
 							/>
-							<p class="content col-11" > ` +
+							<p class="content col-11" class="msg">` +
 				// `<br><br>#include <stdio.h><br><br>int main(void)<br>{<br>    printf("Hello, World!\n");<br>    return 0;<br>}` +
 				message +
-				`</p>
+				`				</p>
 						</div>
 					`;
 
 			chatContainer.innerHTML += msg;
 
 			localStorage.setItem("Chat", chatContainer.innerHTML);
-			window.scrollTo(
-				0,
-				document.body.scrollHeight || document.documentElement.scrollHeight,
-			);
+
+			// scroll to bottom
+			scrollBottom();
+			scrollBottom();
 		}
 
 		function showLoadingView(isShow) {

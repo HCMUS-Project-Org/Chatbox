@@ -97,6 +97,11 @@ h2 {
 	background-color: #343541 !important;
 }
 
+.msg img,
+md-block img {
+	width: 400px !important;
+}
+
 .pre-footer {
-	height: 130px !important;
+	height: 150px !important;
 }
