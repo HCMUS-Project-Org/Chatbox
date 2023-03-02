@@ -97,6 +97,22 @@ h2 {
 	background-color: #343541 !important;
 }
 
+.up-icon,
+.down-icon {
+	height: 40px;
+	width: 40px;
+	right: 30px;
+	bottom: 200px;
+	border: 1px solid white;
+	border-radius: 50%;
+	color: white;
+	background-color: transparent;
+}
+
+.down-icon {
+	top: 100px;
+}
+
 .msg img,
 md-block img {
 	width: 400px !important;

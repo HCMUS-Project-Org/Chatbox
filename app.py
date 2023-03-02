@@ -7,10 +7,10 @@ try:
     from flask_bootstrap import Bootstrap
     from form.InputPromptForm import InputPromptForm
 except:
-    import os
     # import all package
     os.system("pip install -r requirements.txt")
 
+    import openai
     from flask import Flask, render_template, request, Markup
     from dotenv import load_dotenv, set_key, find_dotenv
     from flask_bootstrap import Bootstrap

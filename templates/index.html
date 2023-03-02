@@ -37,6 +37,16 @@
 			</div>
 			<!-- end loadingView -->
 
+			<!-- to top page -->
+			<button
+				class="position-fixed up-icon"
+				id="up-btn"
+				onclick="scrollToTop()"
+			>
+				<i class="fas fa-arrow-up"></i>
+			</button>
+			<!-- end to top page -->
+
 			<div
 				class="d-flex flex-column justify-content-around align-content-around m-0 vw-100"
 			>
@@ -235,8 +245,18 @@
 	></script>
 
 	<script>
+		window.onscroll = function (ev) {
+			let upBtn = document.getElementById("up-btn");
+			if (window.scrollY >= 300) {
+				console.log("hi");
+				upBtn.style.display = "block";
+			} else {
+				upBtn.style.display = "none";
+			}
+		};
 		window.onload = function () {
 			document.getElementById("prompt").value = "";
+			loadChat();
 
 			let reloadFlag = false;
 
@@ -264,41 +284,16 @@
 				console.log("show modal");
 				showInputAPIModal();
 			}
+
+			scrollToBottom();
 		};
-
-		function scrollBottom() {
-			// window.scrollTo(
-			// 	0,
-			// 	document.body.scrollHeight || document.documentElement.scrollHeight,
-			// );
-			// window.scrollTo({
-			// 	left: 0,
-			// 	top: document.body.scrollHeight,
-			// 	behavior: "smooth",
-			// });
-			scrollInterval;
-			stopScroll;
-
-			var scrollInterval = setInterval(function () {
-				document.documentElement.scrollTop =
-					document.documentElement.scrollHeight;
-			}, 50);
-
-			var stopScroll = setInterval(function () {
-				clearInterval(scrollInterval);
-			}, 100);
-
-			// const scrollingElement = document.scrollingElement || document.body;
-			// scrollingElement.scrollTop = scrollingElement.scrollHeight;
-		}
 
 		function addMessage(object) {
 			object == "user" ? showLoadingView(true) : showLoadingView(false);
 
 			if (object == "bot" && "{{message}}".replace('"', "") == "") return;
 
-			const chatContainer = document.getElementById("chat-container");
-			chatContainer.innerHTML = localStorage.getItem("Chat");
+			const chatContainer = loadChat();
 
 			let logo =
 				object == "user"
@@ -311,7 +306,9 @@
 					: "{{message}}";
 
 			if (
-				(message.includes(".png") || message.includes(".jpg")) &&
+				(message.includes(".png") ||
+					message.includes(".jpg") ||
+					message.includes(".jpeg")) &&
 				message.includes("![")
 			) {
 				console.log("this is image");
@@ -345,13 +342,29 @@
 			localStorage.setItem("Chat", chatContainer.innerHTML);
 
 			// scroll to bottom
-			scrollBottom();
-			scrollBottom();
+			scrollToBottom();
 		}
 
 		function showLoadingView(isShow) {
 			let loadingView = document.getElementById("loading-view");
 			loadingView.style.display = isShow ? "block" : "none";
+		}
+
+		function scrollToTop() {
+			window.scrollTo(0, 0);
+		}
+
+		function scrollToBottom() {
+			window.scrollTo(
+				0,
+				document.body.scrollHeight || document.documentElement.scrollHeight,
+			);
+		}
+
+		function loadChat() {
+			const chatContainer = document.getElementById("chat-container");
+			chatContainer.innerHTML = localStorage.getItem("Chat");
+			return chatContainer;
 		}
 
 		function clearChat() {
