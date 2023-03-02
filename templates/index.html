@@ -90,7 +90,9 @@
 									</div>
 									{{form.newAPI}}
 								</div>
-								<div class="modal-footer">
+								<div
+									class="modal-footer border-0 flex align-items-end mx-2"
+								>
 									<button
 										type="button"
 										class="btn btn-secondary"
@@ -111,6 +113,60 @@
 					</div>
 					<!-- end Modal -->
 				</form>
+				<!-- Error Modal -->
+				<div
+					class="modal fade"
+					id="error-modal"
+					tabindex="-1"
+					aria-labelledby="exampleModalLabel"
+					aria-hidden="true"
+				>
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header m-0">
+								<h3 class="modal-title" id="exampleModalLabel">
+									Error
+								</h3>
+								<button
+									type="button"
+									class="btn-close m-0"
+									data-bs-dismiss="modal"
+									aria-label="Close"
+								></button>
+							</div>
+							<div class="modal-body">
+								<div
+									class="alert alert-danger d-flex align-items-center mb-0"
+									role="alert"
+								>
+									<i class="fas fa-exclamation-triangle me-3"></i>
+									<div>
+										<p class="m-0">{{error}}</p>
+									</div>
+								</div>
+							</div>
+							<div
+								class="modal-footer border-0 flex align-items-end mx-2 pt-0"
+							>
+								<button
+									type="button"
+									class="btn btn-secondary"
+									data-bs-dismiss="modal"
+								>
+									Close
+								</button>
+								<button
+									type="submit"
+									class="btn btn-primary"
+									onclick="clearChat()"
+								>
+									Reload
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- end  error  Modal -->
 
 				<!-- footer -->
 				<footer class="position-relative p-0 h-100">
@@ -193,6 +249,11 @@
 				showLoadingView(false);
 			} else addMessage("bot");
 
+			if (`{{error}}`) {
+				console.log("show modal");
+				showErrorModal();
+			}
+
 			console.log("check {{checkAPI}} ");
 			console.log("type:", typeof "{{checkAPI}}");
 			//show imput modal
@@ -233,9 +294,10 @@
 				`"
 								alt="logo"
 							/>
-							<p class="content col-11">` +
+							<p class="content col-11" > ` +
+				// `<br><br>#include <stdio.h><br><br>int main(void)<br>{<br>    printf("Hello, World!\n");<br>    return 0;<br>}` +
 				message +
-				`	</p>
+				`</p>
 						</div>
 					`;
 
@@ -266,6 +328,14 @@
 				document.getElementById("input-new-api-modal"),
 			);
 			var modalToggle = document.getElementById("input-new-api-modal"); // relatedTarget
+			myModal.show(modalToggle);
+		}
+
+		function showErrorModal() {
+			var myModal = new bootstrap.Modal(
+				document.getElementById("error-modal"),
+			);
+			var modalToggle = document.getElementById("error-modal"); // relatedTarget
 			myModal.show(modalToggle);
 		}
 	</script>

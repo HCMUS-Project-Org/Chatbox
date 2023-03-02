@@ -12,6 +12,27 @@ h2 {
 	font-size: 40px;
 }
 
+.btn-primary {
+	background: #6c757d;
+	border: none;
+}
+
+.btn-primary:hover {
+	background: #53595f;
+	font-weight: bold;
+}
+
+.btn-secondary {
+	background: transparent;
+	border: none;
+}
+
+.btn-secondary:hover {
+	background: transparent;
+	border: none;
+	font-weight: bold;
+}
+
 .loading-view {
 	z-index: 100;
 }
