@@ -1,3 +1,4 @@
+import openai
 import os
 
 try:
@@ -30,8 +31,11 @@ PRESENCE_PENALTY = os.getenv("PRESENCE_PENALTY")
 app = Flask(__name__)
 
 Bootstrap(app)
-# sk-4FpBCSHWvehW6OwbA5sfT3BlbkFJMo4fJRyIS5baZrhN0Y
+
 app.config['SECRET_KEY'] = SECRET_KEY
+
+
+API_KEY = os.getenv("API_KEY")
 openai.api_key = API_KEY
 
 
@@ -39,7 +43,6 @@ print("key:", API_KEY)
 
 
 def call_openai(prompt):
-    # Generate text with the GPT-3 model
     response = openai.Completion.create(
         engine=MODEL_ENGINE,
         prompt=prompt,
@@ -47,7 +50,6 @@ def call_openai(prompt):
         temperature=float(TEMPERATURE),
         frequency_penalty=float(FREQUENCY_PENALTY),
         presence_penalty=float(PRESENCE_PENALTY),
-        # stop=["\"\"\""]
     )
     print("response:", response)
 
@@ -74,7 +76,6 @@ def main():
             # get chatbot response
             try:
                 message = call_openai(prompt)
-
             except Exception as e:
                 print("Error:", e)
                 if "Incorrect API key provided" in str(e):
