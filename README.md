@@ -2,11 +2,12 @@
 
 ## Report
 
-Report: [Click here!](https://docs.google.com/document/d/1lnbVuqS9-5NX0DShnio0EvpFzl4awvf-Qv7MIyTyals/edit?usp=sharing)
+Document: [Report](https://docs.google.com/document/d/1lnbVuqS9-5NX0DShnio0EvpFzl4awvf-Qv7MIyTyals/edit?usp=sharing)  
+Slide: [Presentation Slide](https://studenthcmusedu-my.sharepoint.com/:p:/g/personal/19127525_student_hcmus_edu_vn/ESQW4FMuGzRJrYHTVzh_OFYBLuFvv4eduu2Y04bbH_WbFQ?e=nBZ2Ik)
 
 ## Demo
 
-Video demo: [Click here!](https://youtu.be/U9o-iFPdteU)
+Video: [Demo](https://youtu.be/U9o-iFPdteU)
 
 ## Running
 
